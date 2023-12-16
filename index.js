@@ -55,8 +55,6 @@ function createElement(inputValue) {
 
   //   Task Completed
 
- 
-
   const taskPara = document.createElement("p");
 
   taskPara.classList.add("para");
@@ -65,13 +63,6 @@ function createElement(inputValue) {
     taskPara.innerHTML = `<strong>${inputValue}</strong> <br> <small>Due Date:${date.value} </small></br>`;
   } else {
     taskPara.innerHTML = `<strong>${inputValue}</strong>`;
-  }
-
-  //   high Priority Check
-  if (selectedPriority === "high") {
-    // count++;
-    priority++;
-    highPriority.innerHTML = `High Priority ${priority} of ${count}`;
   }
   taskCheckbox.addEventListener("change", () => {
     if (taskCheckbox.checked) {
@@ -84,21 +75,26 @@ function createElement(inputValue) {
         priority--;
         highPriority.innerHTML = `High Priority ${priority} of ${count}`;
       }
-      
-    } 
-    else {
+    } else {
       CompleteTasks--;
       completeTask.innerHTML = `Complete ${CompleteTasks}`;
-      // if(selectedPriority=== "high"){
-
-      //   priority++;
-      // }
+      if (selectedPriority === "high") {
+        priority++;
+      }
       highPriority.innerHTML = `High Priority ${priority} of ${count}`;
       taskPara.classList.remove("line-through");
       taskPara.style.color = "white";
       //   priority--;
     }
   });
+
+  //   high Priority Check
+  if (selectedPriority === "high" && count >= 0) {
+    // count++;
+    priority++;
+    highPriority.innerHTML = `High Priority ${priority} of ${count}`;
+  }
+
   //   Priority status
 
   const priorityTabs = document.createElement("div");
@@ -127,14 +123,24 @@ function createElement(inputValue) {
   taskDeleteBtn.textContent = "delete";
 
   taskDeleteBtn.addEventListener("click", () => {
-    if (selectedPriority === "high" && count >= 0 && priority >= 0) {
+    if (selectedPriority === "high" && count > 0 && priority > 0) {
       priority--;
       count--;
       highPriority.innerHTML = `High Priority ${priority} of ${count}`;
+    } else {
+      // count = 0;
+      // priority = 0;
+      count--;
+
+      highPriority.innerHTML = `High Priority ${priority} of ${count}`;
+      totalTodos.innerHTML = `To-do list ${count}`;
     }
-    count--;
+
+    // Assuming taskDiv is a reference to the element you want to remove
     taskDiv.remove();
+
     totalTodos.innerHTML = `To-do list ${count}`;
+
     if (count === 0) {
       totalTodos.innerHTML = `To Do 0`;
     }
@@ -146,8 +152,6 @@ function createElement(inputValue) {
   btnContainer.append(taskEditBtn, taskDeleteBtn);
 
   taskDiv.append(taskCheckbox, taskPara, priorityTabs, btnContainer);
-
-
 
   return taskDiv;
 }
