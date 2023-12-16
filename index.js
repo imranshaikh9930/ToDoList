@@ -66,7 +66,12 @@ function createElement(inputValue) {
         priority--;
         highPriority.innerHTML = `High Priority ${priority} of ${count}`;
       }
-    } else {
+      else{
+        priority++;
+        highPriority.innerHTML = `High Priority ${priority} of ${count}`;
+      }
+    } 
+    else {
       CompleteTasks--;
       completeTask.innerHTML = `Complete ${CompleteTasks}`;
       priority++;
