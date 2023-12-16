@@ -55,32 +55,7 @@ function createElement(inputValue) {
 
   //   Task Completed
 
-  taskCheckbox.addEventListener("change", () => {
-    if (taskCheckbox.checked) {
-      taskPara.classList.add("line-through");
-      taskPara.style.color = "#808080";
-      CompleteTasks++;
-      completeTask.innerHTML = `Complete ${CompleteTasks}`;
-
-      if (selectedPriority === "high" && priority >= 0) {
-        priority--;
-        highPriority.innerHTML = `High Priority ${priority} of ${count}`;
-      }
-      else{
-        priority++;
-        highPriority.innerHTML = `High Priority ${priority} of ${count}`;
-      }
-    } 
-    else {
-      CompleteTasks--;
-      completeTask.innerHTML = `Complete ${CompleteTasks}`;
-      priority++;
-      highPriority.innerHTML = `High Priority ${priority} of ${count}`;
-      taskPara.classList.remove("line-through");
-      taskPara.style.color = "white";
-      //   priority--;
-    }
-  });
+ 
 
   const taskPara = document.createElement("p");
 
@@ -98,7 +73,32 @@ function createElement(inputValue) {
     priority++;
     highPriority.innerHTML = `High Priority ${priority} of ${count}`;
   }
+  taskCheckbox.addEventListener("change", () => {
+    if (taskCheckbox.checked) {
+      taskPara.classList.add("line-through");
+      taskPara.style.color = "#808080";
+      CompleteTasks++;
+      completeTask.innerHTML = `Complete ${CompleteTasks}`;
 
+      if (selectedPriority === "high" && priority >= 0) {
+        priority--;
+        highPriority.innerHTML = `High Priority ${priority} of ${count}`;
+      }
+      
+    } 
+    else {
+      CompleteTasks--;
+      completeTask.innerHTML = `Complete ${CompleteTasks}`;
+      // if(selectedPriority=== "high"){
+
+      //   priority++;
+      // }
+      highPriority.innerHTML = `High Priority ${priority} of ${count}`;
+      taskPara.classList.remove("line-through");
+      taskPara.style.color = "white";
+      //   priority--;
+    }
+  });
   //   Priority status
 
   const priorityTabs = document.createElement("div");
@@ -147,27 +147,7 @@ function createElement(inputValue) {
 
   taskDiv.append(taskCheckbox, taskPara, priorityTabs, btnContainer);
 
-  //   statused.addEventListener("change",()=>{
 
-  //     let started = 0,done=0;
-
-  //     const totalStarted = document.querySelector(".total-started");
-  //     const highPrioritty = document.querySelector(".high-priority");
-
-  //     console.log(statused.value)
-
-  //     if(statused.value === "in-progress"){
-  //         started++;
-
-  //         totalStarted.innerHTML =`Started ${started}`;
-  //     }
-
-  //     if(statused.value ==="done"){
-  //         done++;
-  //         highPrioritty.innerHTML =`Started ${done}`;
-  //     }
-
-  // })
 
   return taskDiv;
 }
